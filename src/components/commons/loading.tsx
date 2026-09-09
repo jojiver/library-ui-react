@@ -1,4 +1,5 @@
-import loadingImage from "@/assets/images/Loading_2.gif"
+import loadingImage from "@/assets/images/loading_2.gif";
+
 export function PageLoading() {
   return (
     <section className="h-screen flex justify-center items-center flex-col gap-4">
