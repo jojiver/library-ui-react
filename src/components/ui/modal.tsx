@@ -9,7 +9,7 @@ type ModalProps = {
     children: ReactNode;
 }
 
-export function modal({open, onClose, title, children}: ModalProps) {
+export function Modal({open, onClose, title, children}: ModalProps) {
     if(!open) {
         return null;
     }
