@@ -1,42 +1,59 @@
 import type { HTMLAttributes } from "react";
 import { NavLink } from "react-router";
+import { BookOpen, Clock, Mail, MapPin } from "lucide-react";
 import { cn } from "@/lib/cn";
 import { Section } from "@/components/common/section";
+import { Fleuron } from "@/components/common/fleuron";
 
 type FooterProps = HTMLAttributes<HTMLElement>;
 
 const footerLinks = [
   { label: "Home", to: "/" },
-  { label: "Books", to: "/books" },
-  { label: "User Login", to: "/login" },
-  { label: "Admin Login", to: "/admin/login" },
+  { label: "Catalog", to: "/books" },
+  { label: "About", to: "/about" },
+  { label: "Contact", to: "/contact" },
+  { label: "Staff Login", to: "/admin/login" },
 ];
 
 export function Footer({ className, ...props }: FooterProps) {
   return (
     <footer
-      className={cn("border-t border-gray-200 bg-white", className)}
+      className={cn("bg-brand-900 text-gray-300", className)}
       {...props}
     >
-      <Section className="py-8">
-        <div className="flex flex-col gap-8 md:flex-row md:items-start md:justify-between">
+      <Section className="py-12">
+        <div className="grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-4">
           {/* Brand */}
-          <div className="max-w-sm">
-            <NavLink to="/" className="text-lg font-bold text-gray-900">
-              Library System
-            </NavLink>
+          <div>
+            <div className="flex items-center gap-3">
+              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-brand-800 text-gold-400 ring-1 ring-gold-400/40">
+                <BookOpen className="h-5 w-5" />
+              </div>
+              <div>
+<span className="block font-display text-base font-bold leading-none text-white">
+                Library{" "}
+                <span className="font-medium italic text-gold-400">System</span>
+              </span>
+                <span className="mt-1 block text-[11px] uppercase tracking-wider text-gray-400">
+                  Gabi, Cordova, Cebu
+                </span>
+              </div>
+            </div>
 
-            <p className="mt-2 text-sm leading-6 text-gray-500">
-              A simple library management system for managing books, users, and
-              borrowings.
+            <p className="mt-4 text-sm leading-6 text-gray-400">
+              Supporting teaching, research, and lifelong learning with a
+              growing print and digital collection for students, faculty, and
+              the community.
             </p>
           </div>
 
-          {/* Links */}
+          {/* Quick links */}
           <div>
-            <h2 className="text-sm font-semibold text-gray-900">Quick Links</h2>
+            <h2 className="font-display text-sm font-bold uppercase tracking-wider text-gold-400">
+              Quick Links
+            </h2>
 
-            <nav className="mt-3 flex flex-col gap-2">
+            <nav className="mt-4 flex flex-col gap-2.5">
               {footerLinks.map((link) => (
                 <NavLink
                   key={link.to}
@@ -45,8 +62,8 @@ export function Footer({ className, ...props }: FooterProps) {
                     cn(
                       "text-sm transition-colors",
                       isActive
-                        ? "text-primary"
-                        : "text-gray-500 hover:text-gray-900",
+                        ? "text-gold-300"
+                        : "text-gray-400 hover:text-white",
                     )
                   }
                 >
@@ -56,33 +73,57 @@ export function Footer({ className, ...props }: FooterProps) {
             </nav>
           </div>
 
-          {/* Account */}
+          {/* Hours */}
           <div>
-            <h2 className="text-sm font-semibold text-gray-900">Account</h2>
+            <h2 className="flex items-center gap-2 font-display text-sm font-bold uppercase tracking-wider text-gold-400">
+              <Clock className="h-4 w-4" />
+              Library Hours
+            </h2>
 
-            <nav className="mt-3 flex flex-col gap-2">
-              <NavLink
-                to="/login"
-                className="text-sm text-gray-500 transition-colors hover:text-gray-900"
-              >
-                User Login
-              </NavLink>
+            <dl className="mt-4 space-y-2.5 text-sm">
+              <div className="flex justify-between gap-4">
+                <dt className="text-gray-400">Mon – Fri</dt>
+                <dd className="text-gray-200">7:00 AM – 9:00 PM</dd>
+              </div>
+              <div className="flex justify-between gap-4">
+                <dt className="text-gray-400">Saturday</dt>
+                <dd className="text-gray-200">9:00 AM – 5:00 PM</dd>
+              </div>
+              <div className="flex justify-between gap-4">
+                <dt className="text-gray-400">Sunday</dt>
+                <dd className="text-gray-200">Closed</dd>
+              </div>
+            </dl>
+          </div>
 
-              <NavLink
-                to="/admin/login"
-                className="text-sm text-gray-500 transition-colors hover:text-gray-900"
-              >
-                Admin Login
-              </NavLink>
-            </nav>
+          {/* Visit */}
+          <div>
+            <h2 className="font-display text-sm font-bold uppercase tracking-wider text-gold-400">
+              Visit Us
+            </h2>
+
+            <ul className="mt-4 space-y-3 text-sm text-gray-400">
+              <li className="flex items-start gap-2.5">
+                <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-gold-400" />
+                Gabi, Cordova, Cebu
+                <br />
+                Philippines
+              </li>
+              <li className="flex items-center gap-2.5">
+                <Mail className="h-4 w-4 shrink-0 text-gold-400" />
+                library@librarysystem.com
+              </li>
+            </ul>
           </div>
         </div>
 
         {/* Bottom */}
-        <div className="mt-8 border-t border-gray-200 pt-6">
-          <p className="text-center text-sm text-gray-500">
-            © 2026 Library System. All rights reserved.
-          </p>
+        <div className="mt-10 flex items-center justify-center">
+          <Fleuron className="text-gold-400/70" />
+        </div>
+        <div className="mt-6 flex flex-col items-center justify-between gap-3 border-t border-white/10 pt-6 text-sm text-gray-500 md:flex-row">
+          <p>© 2026 Library System. All rights reserved.</p>
+          <p>Serving Gabi, Cordova, Cebu · Catalog accessible to all</p>
         </div>
       </Section>
     </footer>

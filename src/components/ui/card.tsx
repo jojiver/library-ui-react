@@ -48,13 +48,13 @@ export function CardTitle({className, icon, imageSrc, imageFullWidth =  false, c
       )}
       <div className="flex items-center gap-3">
         {icon && (
-          <div className="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-gray-50 text-gray-700 group-hover:bg-blue-50 group-hover:text-blue-600 transition-colors duration-300 shrink-0">
+          <div className="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-gray-50 text-gray-700 group-hover:bg-brand-50 group-hover:text-brand-700 transition-colors duration-300 shrink-0">
             {icon}
           </div>
         )}
         <h3
           className={cn(
-            "text-lg font-bold text-gray-900 group-hover:text-blue-600 transition-colors duration-300",
+            "text-lg font-bold text-gray-900 group-hover:text-brand-700 transition-colors duration-300",
             className
           )}
           {...props}

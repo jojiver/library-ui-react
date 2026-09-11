@@ -29,6 +29,7 @@ type Book = {
   quantity: number;
   available_quantity: number;
   status: "available" | "unavailable";
+  book_image?: string | null;
 };
 
 const statusVariant = {
@@ -38,6 +39,8 @@ const statusVariant = {
 
 export default function AdminBooksPage() {
   const [books, setBooks] = useState<Book[]>([]);
+  const [genres, setGenres] = useState<string[]>([]);
+  const [selectedGenres, setSelectedGenres] = useState<string[]>([]);
   const [search, setSearch] = useState("");
   const [page, setPage] = useState(1);
   const [lastPage, setLastPage] = useState(1);
@@ -50,12 +53,51 @@ export default function AdminBooksPage() {
   const [deletingBook, setDeletingBook] = useState<Book | null>(null);
   const [deleting, setDeleting] = useState(false);
 
+  const toggleGenre = (g: string) => {
+    setSelectedGenres((prev) =>
+      prev.includes(g) ? prev.filter((x) => x !== g) : [...prev, g],
+    );
+    setPage(1);
+  };
+
+  // Get existing genres for the filter checkboxes
+  useEffect(() => {
+    let cancelled = false;
+
+    api
+      .get("/books", { params: { per_page: 1000 } })
+      .then((response) => {
+        if (cancelled) return;
+        const unique = [
+          ...new Set(
+            (response.data.data as Book[])
+              .map((book) => book.category)
+              .filter(Boolean),
+          ),
+        ].sort();
+        setGenres(unique);
+      })
+      .catch((err) => {
+        if (cancelled) return;
+        console.error(err);
+      });
+
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
   // Get All Books
   const getBooks = async () => {
     setLoading(true);
     try {
       const response = await api.get("/books", {
-        params: { page, per_page: 10, search: search || undefined },
+        params: {
+          page,
+          per_page: 10,
+          search: search || undefined,
+          category: selectedGenres.length > 0 ? selectedGenres : undefined,
+        },
       });
       setBooks(response.data.data);
       setLastPage(response.data.meta.last_page);
@@ -71,7 +113,7 @@ export default function AdminBooksPage() {
   useEffect(() => {
     const delay = setTimeout(getBooks, 300);
     return () => clearTimeout(delay);
-  }, [page, search]);
+  }, [page, search, selectedGenres]);
 
   // Auto-hide toast
   useEffect(() => {
@@ -121,6 +163,28 @@ export default function AdminBooksPage() {
         placeholder="Search title, author, ISBN..."
       />
 
+      {genres.length > 0 && (
+        <div className="flex flex-wrap items-center gap-2 rounded-xl border border-gray-200 bg-white px-4 py-3">
+          <span className="mr-1 text-sm font-medium text-gray-700">
+            Genre:
+          </span>
+          {genres.map((g) => (
+            <label
+              key={g}
+              className="flex cursor-pointer items-center gap-1.5 rounded-lg px-2 py-1 text-sm text-gray-600 transition-colors hover:bg-gray-50"
+            >
+              <input
+                type="checkbox"
+                checked={selectedGenres.includes(g)}
+                onChange={() => toggleGenre(g)}
+                className="h-4 w-4 accent-brand-700"
+              />
+              {g}
+            </label>
+          ))}
+        </div>
+      )}
+
       {error && <Toast variant="error">{error}</Toast>}
       {toast && <Toast variant="success">{toast}</Toast>}
 
@@ -132,7 +196,7 @@ export default function AdminBooksPage() {
             <TableRow>
               <TableHead>Title</TableHead>
               <TableHead>Author</TableHead>
-              <TableHead>Category</TableHead>
+              <TableHead>Genre</TableHead>
               <TableHead>Available</TableHead>
               <TableHead>Status</TableHead>
               <TableHead>Actions</TableHead>

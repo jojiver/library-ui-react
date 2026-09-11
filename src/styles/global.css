@@ -1,1 +1,54 @@
 @import "tailwindcss";
+
+@theme {
+  --font-sans: "Outfit", ui-sans-serif, system-ui, -apple-system, "Segoe UI",
+    Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-display: "Fraunces", Georgia, "Iowan Old Style", "Palatino Linotype",
+    serif;
+
+  --color-brand-50: #f0f5f1;
+  --color-brand-100: #d9e7dd;
+  --color-brand-200: #b3cfbd;
+  --color-brand-300: #84af96;
+  --color-brand-400: #559070;
+  --color-brand-500: #3a7657;
+  --color-brand-600: #2d5f46;
+  --color-brand-700: #274e3a;
+  --color-brand-800: #1f3f30;
+  --color-brand-900: #153027;
+
+  --color-gold-50: #fbf5e9;
+  --color-gold-100: #f4e6c6;
+  --color-gold-200: #e9cf92;
+  --color-gold-300: #ddb661;
+  --color-gold-400: #d0a140;
+  --color-gold-500: #c08e2f;
+  --color-gold-600: #a47327;
+  --color-gold-700: #835a22;
+  --color-gold-800: #6b4920;
+  --color-gold-900: #5a3c1e;
+
+  --color-clay-50: #faf0ec;
+  --color-clay-100: #f2dcd3;
+  --color-clay-200: #e4b8a8;
+  --color-clay-300: #d28e76;
+  --color-clay-400: #c26d52;
+  --color-clay-500: #b0553a;
+  --color-clay-600: #99452f;
+  --color-clay-700: #7d3627;
+  --color-clay-800: #652d23;
+  --color-clay-900: #54281f;
+
+  --color-paper: #f6f0e6;
+  --color-ink: #22303a;
+}
+
+@layer base {
+  body {
+    @apply bg-paper text-ink antialiased;
+  }
+
+  ::selection {
+    @apply bg-gold-200 text-brand-900;
+  }
+}

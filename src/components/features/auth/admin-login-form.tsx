@@ -65,6 +65,7 @@ export function AdminLoginForm({ onSuccess }: AdminLoginFormProps) {
 
       localStorage.setItem("token", response.data.token);
       localStorage.setItem("user", JSON.stringify(response.data.user));
+      localStorage.setItem("userType", "admin");
 
       onSuccess?.();
       navigate("/dashboard/admin");
@@ -79,8 +80,9 @@ export function AdminLoginForm({ onSuccess }: AdminLoginFormProps) {
   };
 
   return (
+  
     <form onSubmit={handleLogin} className="flex flex-col gap-4">
-      {/* email / password — same field JSX as UserLoginForm */}
+      {/* email / password fields */}
       <div>
         <Label error={errors.email}>Admin Email</Label>
         <Input type="email" value={email}

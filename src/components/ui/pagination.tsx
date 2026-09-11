@@ -21,8 +21,8 @@ export function PaginationButton({
   return (
     <button
       className={cn(
-        "rounded-md border px-3 py-2 text-sm hover:bg-gray-50",
-        active && "bg-black text-white hover:bg-black",
+        "rounded-md border px-3 py-2 text-sm transition-colors hover:bg-gray-50",
+        active && "border-brand-600 bg-brand-600 text-white hover:bg-brand-600",
         className,
       )}
       {...props}

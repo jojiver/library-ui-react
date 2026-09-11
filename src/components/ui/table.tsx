@@ -18,7 +18,7 @@ type TableDataCellProps = TdHTMLAttributes<HTMLTableCellElement>;
 
 export function Table({ className, ...props }: TableProps) {
   return (
-    <div className="w-full overflow-x-auto rounded-lg border border-gray-200">
+    <div className="w-full overflow-x-auto rounded-xl border border-gray-200 bg-white shadow-sm">
       <table className={cn("w-full text-sm text-left", className)} {...props} />
     </div>
   );
@@ -42,7 +42,7 @@ export function TableBody({
   ...props
 }: TableSectionProps & TableHTMLAttributes<HTMLTableSectionElement>) {
   return (
-    <tbody className={cn("divide-y divide-gray-200", className)} {...props}>
+    <tbody className={cn("divide-y divide-gray-100", className)} {...props}>
       {children}
     </tbody>
   );
@@ -54,7 +54,7 @@ export function TableRow({
   ...props
 }: React.HTMLAttributes<HTMLTableRowElement>) {
   return (
-    <tr className={cn("hover:bg-gray-50", className)} {...props}>
+    <tr className={cn("transition-colors hover:bg-gray-50", className)} {...props}>
       {children}
     </tr>
   );
@@ -64,7 +64,7 @@ export function TableHead({ className, children, ...props }: TableCellProps) {
   return (
     <th
       className={cn(
-        "px-4 py-3 text-xs font-medium uppercase tracking-wide text-gray-500",
+        "px-4 py-3 text-xs font-semibold uppercase tracking-wider text-gray-500",
         className,
       )}
       {...props}

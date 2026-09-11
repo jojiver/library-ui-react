@@ -26,9 +26,15 @@ const errorMessages: FormErrors = {
   borrowerEmail: "Your email is required",
 };
 
+const BORROWER_STORAGE_KEY = "library_borrower";
+
 export function BorrowModal({ book, onClose, onBorrowed }: BorrowModalProps) {
-  const [borrowerName, setBorrowerName] = useState("");
-  const [borrowerEmail, setBorrowerEmail] = useState("");
+  const [borrowerName, setBorrowerName] = useState(() =>
+    localStorage.getItem(BORROWER_STORAGE_KEY + "_name") ?? "",
+  );
+  const [borrowerEmail, setBorrowerEmail] = useState(() =>
+    localStorage.getItem(BORROWER_STORAGE_KEY + "_email") ?? "",
+  );
   const [errors, setErrors] = useState<FormErrors>({});
   const [formError, setFormError] = useState<string | null>(null);
   const [borrowing, setBorrowing] = useState(false);
@@ -74,6 +80,8 @@ export function BorrowModal({ book, onClose, onBorrowed }: BorrowModalProps) {
         borrower_email: borrowerEmail,
       });
 
+      localStorage.setItem(BORROWER_STORAGE_KEY + "_name", borrowerName);
+      localStorage.setItem(BORROWER_STORAGE_KEY + "_email", borrowerEmail);
       setBorrowerName("");
       setBorrowerEmail("");
       onBorrowed();
