@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useSearchParams } from "react-router";
 import api from "@/lib/axios";
 import { BookCard, type Book } from "@/components/features/guest/book-card";
-import { SearchBar } from "@/components/common/search/search-bar";
+import { SearchBar } from "@/components/common/search-bar";
 import { Pagination, PaginationButton } from "@/components/ui/pagination";
 import { PageLoading } from "@/components/common/loading";
 import { Toast } from "@/components/ui/toast";

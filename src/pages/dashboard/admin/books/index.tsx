@@ -5,7 +5,7 @@ import { Badge } from "@/components/ui/badge";
 import { Modal } from "@/components/ui/modal";
 import { Toast } from "@/components/ui/toast";
 import { Pagination, PaginationButton } from "@/components/ui/pagination";
-import { SearchBar } from "@/components/common/search/search-bar";
+import { SearchBar } from "@/components/common/search-bar";
 import { PageLoading } from "@/components/common/loading";
 import {
   Table,

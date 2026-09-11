@@ -22,7 +22,7 @@ export default function HomePage() {
       <LibraryServicesSection />
 
       {/* New arrivals */}
-      <Section className="pt-12">
+      <Section className="py-12">
         <div className="mb-6 flex items-end justify-between">
           <div>
             <Fleuron className="mb-3" />

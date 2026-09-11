@@ -60,7 +60,7 @@ export function AdminLoginForm({ onSuccess }: AdminLoginFormProps) {
     setLoggingIn(true);
 
     try {
-      // change to your backend's admin auth route
+      
       const response = await api.post("/admin/login", { email, password });
 
       localStorage.setItem("token", response.data.token);
